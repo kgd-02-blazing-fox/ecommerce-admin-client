@@ -32,8 +32,29 @@
 </template>
 
 <script>
+import ProductCard from '../components/ProductCard'
+
 export default {
-  name: 'Products'
+  name: 'Products',
+  components: {
+    ProductCard
+  },
+  methods: {
+    fetchProducts () {
+      this.$store.dispatch('fetchProducts')
+    }
+  },
+  created () {
+    this.fetchProducts()
+  },
+  computed: {
+    products () {
+      return this.$store.state.products
+    }
+  },
+  updated () {
+    this.fetchProducts()
+  }
 }
 </script>
 

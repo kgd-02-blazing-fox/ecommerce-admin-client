@@ -31,6 +31,15 @@ export default {
       email: '',
       password: ''
     }
+  },
+  methods: {
+    login () {
+      const userInput = {
+        email: this.email,
+        password: this.password
+      }
+      this.$store.dispatch('postLogin', userInput)
+    }
   }
 }
 </script>

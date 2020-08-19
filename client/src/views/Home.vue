@@ -5,6 +5,7 @@
         <p>E-COMMERSE <span style="font-weight:bold;">CMS</span></p>
       </div>
       <div class="mynavigasi">
+        <!-- <a href="" class="btn btn-primary">Created by <img src="../assets/logo.png" alt="" width="30" height="30" ></a> -->
         <a href="" class="btn btn-" @click.prevent="logout">Logout</a>
       </div>
     </div>
@@ -19,6 +20,12 @@ export default {
   name: 'Home',
   components: {
     Sidebar
+  },
+  methods: {
+    logout () {
+      localStorage.removeItem('token')
+      this.$router.push('/login')
+    }
   }
 }
 </script>

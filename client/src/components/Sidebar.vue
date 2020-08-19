@@ -4,7 +4,7 @@
       <h2>Welcome, Admin!</h2>
       <ul>
         <li><router-link :to="{ name: 'Products' }" class="buttonSidebar"><i class="fa fa-github  fa-2x"></i>All Product</router-link></li>
-        <li><router-link :to="{ name: 'Add Product' }" class="buttonSidebar"><i class="fa fa-github fa-2x"></i>Add Product</router-link></li>
+        <li><router-link :to="{ name: 'Add_Product' }" class="buttonSidebar"><i class="fa fa-github fa-2x"></i>Add Product</router-link></li>
       </ul>
     </div>
     <div class="col-sm-9 offset-sm-3" >

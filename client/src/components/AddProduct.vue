@@ -36,7 +36,7 @@
 
 <script>
 export default {
-  name: 'Add Product',
+  name: 'Add_Product',
   data () {
     return {
       name: '',
@@ -44,6 +44,22 @@ export default {
       price: 0,
       stock: 0
     }
+  },
+  methods: {
+    addProduct () {
+      this.$store.dispatch('addProduct', {
+        name: this.name,
+        image_url: this.image_url,
+        price: this.price,
+        stock: this.stock
+      })
+    }
+  },
+  created () {
+    this.name = ''
+    this.image_url = ''
+    this.price = 0
+    this.stock = 0
   }
 }
 </script>
