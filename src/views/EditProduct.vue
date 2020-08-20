@@ -50,7 +50,7 @@
                 <div class="container d-flex justify-content-center">
                   <div class="row">
                     <div class="col">
-                      <button type="submit" class="btn btn-dark">submit</button>
+                      <button @click="refresh" type="submit" class="btn btn-dark">submit</button>
                     </div>
                     <div class="col">
                       <button @click="back" class="btn btn-dark">back</button>
@@ -67,6 +67,8 @@
 </template>
 
 <script>
+import io from 'socket.io-client'
+
 export default {
   name: 'EditProduct',
   data () {
@@ -86,6 +88,9 @@ export default {
     },
     back () {
       this.$router.push('/dashboard')
+    },
+    refresh () {
+      this.socket.emit('newproduct')
     }
   },
   created () {
@@ -97,6 +102,9 @@ export default {
       const product = unfilteredProduct.filter((product) => product.id === id)
       return product[0]
     }
+  },
+  mounted () {
+    this.socket = io.connect('http://localhost:3000')
   }
 }
 </script>

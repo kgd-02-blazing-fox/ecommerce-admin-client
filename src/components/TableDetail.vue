@@ -1,5 +1,5 @@
 <template>
-  <tbody>
+  <tbody class="">
     <tr>
       <th scope="row">{{data.id}}</th>
     <router-link id="noDecoration" :to="`/dashboard/productDetail/${data.id}`">

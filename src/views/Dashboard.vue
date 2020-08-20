@@ -5,7 +5,7 @@
         <div class="card-header">
           <div class="row">
             <div class="col mt-1">
-              <h1>admin dashboard</h1>
+              <h1><i class="fas fa-user-shield"></i> admin dashboard</h1>
               {{getDate}}
             </div>
             <div class="col-lg col-md-6 col-sm-6 col-xs-6">
@@ -24,6 +24,7 @@
 // @ is an alias to /src
 import Nav from '../components/Nav.vue'
 import TableInfo from '../components/TableInfo.vue'
+import io from 'socket.io-client'
 
 export default {
   name: 'Dashboard',
@@ -34,6 +35,11 @@ export default {
   components: {
     Nav,
     TableInfo
+  },
+  methods: {
+    getChange () {
+      this.$store.dispatch('fetchProducts')
+    }
   },
   computed: {
     getDate () {
@@ -67,6 +73,19 @@ export default {
   },
   created () {
     console.log(this.$route.name)
+  },
+  mounted () {
+    this.socket = io.connect('http://localhost:3000')
+
+    this.socket.on('init', function (payload) {
+      console.log(payload)
+      console.log('init invoked')
+    })
+
+    this.socket.on('CHANGE', () => {
+      this.getChange()
+      console.log('KEPANGGILLLLLLLLLLLLLLLLLLLLLL')
+    })
   }
 }
 </script>

@@ -32,7 +32,7 @@ const routes = [
       {
         path: '',
         name: 'dashboard_home',
-        component: () => import(/* webpackChunkName: "product" */ '../components/Product.vue')
+        component: () => import(/* webpackChunkName: "dashboard_home" */ '../components/Product.vue')
       },
       {
         path: 'productDetail/:id',

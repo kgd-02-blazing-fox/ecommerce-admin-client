@@ -6,6 +6,8 @@
         <img class="rounded img-fluid" :src="spesificProduct.image_url" alt="GAMBAR PRODUCT">
       </div>
       <div class="col-lg-6 col-md-5 col-sm-12 mt-2 border rounded">
+        <router-link class="smaller" to="/dashboard"> close <i class="far fa-times-circle fa-sm"></i>
+        </router-link>
         <div class="row mt-3">
           <div class="col">
             <h2>{{spesificProduct.name}}</h2>
@@ -46,6 +48,7 @@
 </template>
 
 <script>
+import io from 'socket.io-client'
 export default {
   name: 'ProductDetail',
   methods: {
@@ -55,10 +58,14 @@ export default {
     deleteProduct (id) {
       const isConfirmed = confirm('are you sure?')
       if (isConfirmed) {
+        this.refresh()
         this.$store.dispatch('deleteProduct', id)
       } else {
         console.log('delete canceled')
       }
+    },
+    refresh () {
+      this.socket.emit('newproduct')
     }
   },
   created () {
@@ -74,6 +81,9 @@ export default {
       const price = this.spesificProduct.price
       return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(price)
     }
+  },
+  mounted () {
+    this.socket = io.connect('http://localhost:3000')
   }
 }
 </script>
@@ -86,6 +96,9 @@ a{
 }
 a :hover{
   color: #2980b9;
+}
+.smaller{
+  font-size: 17px;
 }
 
 </style>

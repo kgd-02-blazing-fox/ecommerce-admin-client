@@ -3,7 +3,7 @@
     <h1>administator login</h1>
     <div class="container mt-5">
       <div class="row">
-        <div class="col col-lg-6 col-md-12 col-sm-12 border rounded">
+        <div class="col col-lg-6 col-md-12 col-sm-12 border rounded bgcol">
           <form class="m-3" @submit.prevent='login'>
             <div class="form-group">
               <label for="loginEmail">email address</label>
@@ -54,7 +54,6 @@ export default {
       })
         .then((response) => {
           localStorage.setItem('access_token', response.data.access_token)
-          console.log(response.data)
           this.$router.push('/dashboard')
         })
         .catch((err) => {
@@ -74,5 +73,11 @@ export default {
 div{
   justify-content: center;
   align-items: center;
+}
+label{
+  color: white;
+}
+.bgcol{
+  background-color: #2c3e50;
 }
 </style>
