@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-2" id="nav">
+  <div class="mt-3" id="nav">
     <router-link to="/dashboard">
     <i class="fas fa-home"></i> home
     </router-link> |
@@ -27,6 +27,7 @@ export default {
 <style scoped>
 #nav {
   padding: 10px;
+  font-size: 25px;
 }
 
 #nav a {

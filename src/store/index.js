@@ -78,9 +78,32 @@ export default new Vuex.Store({
           console.log('FETCHED PRODUCTS di FINALLY')
         })
     },
-    getProductToEdit (context, id) {
-      console.log('INI DARI STORE GETTTT')
-      console.log(id)
+    updateProduct (context, data) {
+      ServerAPI({
+        method: 'PUT',
+        url: 'products/' + data.id,
+        data: {
+          name: data.name,
+          image_url: data.image_url,
+          price: data.price,
+          stock: data.stock
+        },
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(({ data }) => {
+          console.log('PRODUCT UPDATED')
+          context.dispatch('fetchProducts')
+          router.push('/dashboard')
+        })
+        .catch((err) => {
+          console.log(err)
+          router.push(`/dashboard/editProduct/${data.id}`)
+        })
+        .finally((_) => {
+          console.log('FETCHED PRODUCTS di FINALLY')
+        })
     }
   }
 })

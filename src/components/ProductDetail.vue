@@ -50,7 +50,7 @@ export default {
   name: 'ProductDetail',
   methods: {
     editProduct (id) {
-      this.$store.dispatch('getProductToEdit', id)
+      this.$router.push(`/dashboard/editProduct/${id}`)
     },
     deleteProduct (id) {
       const isConfirmed = confirm('are you sure?')
