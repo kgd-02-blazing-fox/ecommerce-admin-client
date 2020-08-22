@@ -7,14 +7,14 @@
             <h5 class="mt-1">total item(s): {{this.$store.state.products.length}}</h5>
               <div class="row">
                 <div class="col">
-                  <router-link id="noDecoration" :to="`/dashboard/productDetail/${newProduct.id}`">
-                    <img class="responsive rounded" :src="newProduct.image_url" width=50%>
+                  <router-link id="noDecoration" :to="`/dashboard/productDetail/${item.id}`">
+                    <img class="responsive rounded" :src="item.image_url" width=50%>
                   </router-link>
                   <blockquote class="mt-2">
-                    <b>latest input</b><br>
-                    <b>name :</b> {{newProduct.name}} <br>
-                    <b>current stock :</b> {{newProduct.stock}} <br>
-                    <b>input time :</b> {{newProduct.createdAt}}
+                    <b>highlight</b><br>
+                    <b>name :</b> {{item.name}} <br>
+                    <b>current stock :</b> {{item.stock}} <br>
+                    <b>input time :</b> {{item.createdAt}}
                   </blockquote>
                 </div>
             </div>
@@ -33,18 +33,30 @@ import TableList from '../components/TableList'
 
 export default {
   name: 'TabelInfo',
+  data () {
+    return {
+      item: {}
+    }
+  },
   components: {
     TableList
   },
   methods: {
+    newProduct () {
+      const item = this.products
+      const x = Math.round(Math.random() * (item.length - 1))
+      this.item = item[x]
+    }
   },
   created () {
+    this.$store.dispatch('fetchProducts')
+    setTimeout((_) => {
+      this.newProduct()
+    }, 800)
   },
   computed: {
-    newProduct () {
-      const unsort = this.$store.state.products
-      const newInput = unsort.filter((a) => a.id === unsort.length)
-      return newInput[0]
+    products () {
+      return this.$store.state.products
     }
   }
 }

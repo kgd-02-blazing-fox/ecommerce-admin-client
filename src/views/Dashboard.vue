@@ -1,5 +1,11 @@
 <template>
   <div class="container-fluid dashboard">
+    <div class="position-sticky sticky-top colini">
+      <Alert
+      v-if="alert.isOn === true"
+      :message="alert.message"
+      />
+    </div>
     <div class="container-fluid">
       <div class="card">
         <div class="card-header">
@@ -24,6 +30,7 @@
 // @ is an alias to /src
 import Nav from '../components/Nav.vue'
 import TableInfo from '../components/TableInfo.vue'
+import Alert from '../components/Alert'
 import io from 'socket.io-client'
 
 export default {
@@ -34,11 +41,14 @@ export default {
   },
   components: {
     Nav,
+    Alert,
     TableInfo
   },
   methods: {
     getChange () {
       this.$store.dispatch('fetchProducts')
+    },
+    addProduct () {
     }
   },
   computed: {
@@ -69,22 +79,31 @@ export default {
       const calender = new Date().toJSON().slice(0, 10).replace(/-/g, '/')
       const today = day + ', ' + calender
       return today
+    },
+    alert () {
+      return this.$store.state.alert
     }
   },
   created () {
-    console.log(this.$route.name)
+    // console.log(this.$route.name)
   },
   mounted () {
     this.socket = io.connect('http://localhost:3000')
 
     this.socket.on('init', function (payload) {
-      console.log(payload)
-      console.log('init invoked')
+      console.log('>>>> INVOKED <<<< ')
     })
 
-    this.socket.on('CHANGE', () => {
-      this.getChange()
-      console.log('KEPANGGILLLLLLLLLLLLLLLLLLLLLL')
+    this.socket.on('NewAddProducts', () => {
+      this.$store.dispatch('fetchProducts')
+    })
+
+    this.socket.on('NewEditProduct', (payload) => {
+      this.$store.dispatch('updateProduct', payload)
+    })
+
+    this.socket.on('NewDeleteingProduct', () => {
+      this.$store.dispatch('fetchProducts')
     })
   }
 }

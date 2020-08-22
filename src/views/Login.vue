@@ -1,6 +1,7 @@
 <template>
   <div class="container mt-5">
-    <h1>administator login</h1>
+    <img src="../assets/vue-commerce.png" alt="">
+    <h1>login</h1>
     <div class="container mt-5">
       <div class="row">
         <div class="col col-lg-6 col-md-12 col-sm-12 border rounded bgcol">

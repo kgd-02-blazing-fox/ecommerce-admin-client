@@ -1,11 +1,11 @@
 <template>
-  <div id="bgCol" class="container-fluid m-5">
+  <div id="bgCol" class="container-fluid col col-lg-6 col-md-12 col-sm-12 mt-4">
     <h3><i class="fas fa-warehouse fa-2x"> </i> edit product</h3>
     <div class="row">
       <div class="col">
         <div class="container mt-2">
           <div class="row">
-            <div class="col col-lg-6 col-md-12 col-sm-12 border rounded formbg">
+            <div class="col border rounded formbg">
               <form class="m-3" @submit.prevent='add'>
                 <div class="form-group">
                   <label for="productName">
@@ -50,7 +50,7 @@
                 <div class="container d-flex justify-content-center">
                   <div class="row">
                     <div class="col">
-                      <button @click="refresh" type="submit" class="btn btn-dark">submit</button>
+                      <button type="submit" class="btn btn-dark">submit</button>
                     </div>
                     <div class="col">
                       <button @click="back" class="btn btn-dark">back</button>
@@ -84,13 +84,11 @@ export default {
         price: this.spesificProduct.price,
         stock: this.spesificProduct.stock
       }
-      this.$store.dispatch('updateProduct', data)
+      this.socket.emit('newEditproduct', data)
+      this.$router.push('/dashboard')
     },
     back () {
       this.$router.push('/dashboard')
-    },
-    refresh () {
-      this.socket.emit('newproduct')
     }
   },
   created () {

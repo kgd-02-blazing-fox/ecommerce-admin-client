@@ -8,11 +8,27 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     products: [],
-    spesificProduct: {}
+    spesificProduct: {},
+    alert: {
+      isOn: false,
+      message: ''
+    }
   },
   mutations: {
     SET_PRODUCTS (state, payload) {
       state.products = payload
+    },
+    ALERT (state, payload) {
+      state.alert = {
+        isOn: true,
+        message: payload
+      }
+      setTimeout((_) => {
+        state.alert = {
+          isOn: false,
+          message: payload
+        }
+      }, 3000)
     }
   },
   actions: {
@@ -26,6 +42,7 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err)
+          context.commit('ALERT', 'FETCH FAILED')
         })
         .finally((_) => {
           console.log('FETCHED PRODUCTS di FINALLY')
@@ -46,12 +63,11 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log('PRODUCT ADDED')
           context.dispatch('fetchProducts')
-          router.push('/dashboard')
         })
         .catch((err) => {
           console.log(err)
+          context.commit('ALERT', 'ADD FAILED')
           router.push('/dashboard/addProduct')
         })
         .finally((_) => {
@@ -68,14 +84,12 @@ export default new Vuex.Store({
       })
         .then(({ data }) => {
           context.dispatch('fetchProducts')
-          router.push('/dashboard')
         })
         .catch((err) => {
           console.log(err)
-          router.push('/dashboard/productDetail/' + id)
         })
         .finally((_) => {
-          console.log('FETCHED PRODUCTS di FINALLY')
+          // context.commit('ALERT', 'PRODUCT DELETED')
         })
     },
     updateProduct (context, data) {
@@ -93,12 +107,12 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log('PRODUCT UPDATED')
+          context.commit('ALERT', 'PRODUCT UPDATED')
           context.dispatch('fetchProducts')
-          router.push('/dashboard')
         })
         .catch((err) => {
           console.log(err)
+          context.commit('ALERT', 'EDIT FAILED')
           router.push(`/dashboard/editProduct/${data.id}`)
         })
         .finally((_) => {

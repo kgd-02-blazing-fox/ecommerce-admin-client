@@ -31,14 +31,16 @@
         </div>
         <div class="row mt-5">
           <div class="col">
-            <a href="#" @click="editProduct(spesificProduct.id)">
+            <a href="#" @click.prevent="editProduct(spesificProduct.id)">
             <i class="fas fa-pen-square"></i> edit
             </a>
           </div>
           <div class="col">
-            <a href="#" @click="deleteProduct(spesificProduct.id)">
+            <router-link to="/dashboard">
+            <b @click="deleteProduct(spesificProduct.id)">
             <i class="fas fa-trash-alt"></i> delete
-            </a>
+            </b>
+            </router-link>
           </div>
         </div>
       </div>
@@ -56,16 +58,19 @@ export default {
       this.$router.push(`/dashboard/editProduct/${id}`)
     },
     deleteProduct (id) {
+      this.socket = io.connect('http://localhost:3000')
       const isConfirmed = confirm('are you sure?')
       if (isConfirmed) {
-        this.refresh()
         this.$store.dispatch('deleteProduct', id)
+        this.$router.push('/dashboard')
+        setTimeout((_) => {
+          this.socket.emit('deleteingProduct')
+        }, 1000)
       } else {
         console.log('delete canceled')
       }
     },
     refresh () {
-      this.socket.emit('newproduct')
     }
   },
   created () {
@@ -81,9 +86,6 @@ export default {
       const price = this.spesificProduct.price
       return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(price)
     }
-  },
-  mounted () {
-    this.socket = io.connect('http://localhost:3000')
   }
 }
 </script>
