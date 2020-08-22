@@ -96,7 +96,7 @@ export default {
     // console.log(this.$route.name)
   },
   mounted () {
-    this.socket = io.connect('http://localhost:3000')
+    this.socket = io.connect('https://deploy-cms-ecommerce.herokuapp.com/')
 
     this.socket.on('init', function (payload) {
       console.log('>>>> INVOKED <<<< ')

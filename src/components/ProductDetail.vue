@@ -58,7 +58,7 @@ export default {
       this.$router.push(`/dashboard/editProduct/${id}`)
     },
     deleteProduct (id) {
-      this.socket = io.connect('http://localhost:3000')
+      this.socket = io.connect('https://deploy-cms-ecommerce.herokuapp.com/')
       const isConfirmed = confirm('are you sure?')
       if (isConfirmed) {
         this.$store.dispatch('deleteProduct', id)

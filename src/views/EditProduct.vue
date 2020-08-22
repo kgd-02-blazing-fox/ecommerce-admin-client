@@ -102,7 +102,7 @@ export default {
     }
   },
   mounted () {
-    this.socket = io.connect('http://localhost:3000')
+    this.socket = io.connect('https://deploy-cms-ecommerce.herokuapp.com/')
   }
 }
 </script>

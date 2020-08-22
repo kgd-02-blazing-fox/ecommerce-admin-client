@@ -86,7 +86,7 @@ export default {
       this.socket.emit('newproduct')
     },
     add () {
-      this.socket = io.connect('http://localhost:3000')
+      this.socket = io.connect('https://deploy-cms-ecommerce.herokuapp.com/')
       const data = {
         name: this.productName,
         image_url: this.productImageUrl,
