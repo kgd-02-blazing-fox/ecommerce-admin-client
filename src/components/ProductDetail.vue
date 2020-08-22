@@ -29,7 +29,7 @@
             <h3>{{spesificProduct.stock}} pc(s)</h3>
           </div>
         </div>
-        <div class="row mt-5">
+        <div v-if="userRole === 1" class="row mt-5">
           <div class="col">
             <a href="#" @click.prevent="editProduct(spesificProduct.id)">
             <i class="fas fa-pen-square"></i> edit
@@ -85,6 +85,9 @@ export default {
     priceInRupiah () {
       const price = this.spesificProduct.price
       return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(price)
+    },
+    userRole () {
+      return Number(localStorage.getItem('role'))
     }
   }
 }

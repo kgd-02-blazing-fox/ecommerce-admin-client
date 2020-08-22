@@ -11,7 +11,8 @@
         <div class="card-header">
           <div class="row">
             <div class="col mt-1">
-              <h1><i class="fas fa-user-shield"></i> admin dashboard</h1>
+              <h1 v-if="userRole === 1" ><i class="fas fa-user-shield"></i> admin dashboard</h1>
+              <h3 v-if="userRole === 0">welcome {{userEmail}} </h3>
               {{getDate}}
             </div>
             <div class="col-lg col-md-6 col-sm-6 col-xs-6">
@@ -37,6 +38,7 @@ export default {
   name: 'Dashboard',
   data () {
     return {
+      role: 0
     }
   },
   components: {
@@ -82,6 +84,12 @@ export default {
     },
     alert () {
       return this.$store.state.alert
+    },
+    userRole () {
+      return Number(localStorage.getItem('role'))
+    },
+    userEmail () {
+      return localStorage.getItem('user')
     }
   },
   created () {

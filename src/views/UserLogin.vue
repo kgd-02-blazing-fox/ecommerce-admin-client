@@ -1,7 +1,7 @@
 <template>
-  <div class="container mt-2">
+  <div class="container mt-5">
     <img class="img-fluid" src="../assets/vue-commerce.png" width="50%" alt="">
-    <h1>admin</h1>
+    <h1>vueser login</h1>
     <div class="container">
       <div class="row">
         <div class="col col-lg-6 col-md-12 col-sm-12 border rounded bgcol">
@@ -47,7 +47,7 @@ export default {
     login () {
       ServerAPI({
         method: 'POST',
-        url: 'admin',
+        url: 'user',
         data: {
           email: this.loginEmail,
           password: this.loginPassword
@@ -55,7 +55,8 @@ export default {
       })
         .then((response) => {
           localStorage.setItem('access_token', response.data.access_token)
-          localStorage.setItem('role', 1)
+          localStorage.setItem('user', response.data.email)
+          localStorage.setItem('role', 0)
           this.$router.push('/dashboard')
         })
         .catch((err) => {

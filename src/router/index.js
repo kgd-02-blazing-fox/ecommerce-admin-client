@@ -1,12 +1,25 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
+import UserLogin from '../views/UserLogin.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
+    name: 'UserLogin',
+    component: UserLogin,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('access_token')) {
+        next('/dashboard')
+      } else {
+        next()
+      }
+    }
+  },
+  {
+    path: '/admin',
     name: 'Login',
     component: Login,
     beforeEnter: (to, from, next) => {

@@ -1,14 +1,22 @@
 <template>
   <div class="mt-3" id="nav">
-    <router-link to="/dashboard">
-    <i class="fas fa-home"></i> home
-    </router-link> |
-    <router-link to="/dashboard/addProduct">
-    <i class="fas fa-plus-circle"></i> add product
-    </router-link> |
-    <a href="#" @click.prevent="logout">
-      <i class="fas fa-sign-out-alt"></i> logout
-    </a>
+    <div class="row">
+      <div class="col">
+        <router-link to="/dashboard">
+          <i class="fas fa-home"></i> home
+        </router-link>
+      </div>
+      <div v-if="userRole === 1" class="col">
+        <router-link to="/dashboard/addProduct">
+          <i class="fas fa-plus-circle"></i> add product
+        </router-link>
+      </div>
+      <div class="col">
+        <a href="#" @click.prevent="logout">
+          <i class="fas fa-sign-out-alt"></i> logout
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,6 +28,11 @@ export default {
       localStorage.clear()
       this.$router.push('/')
     }
+  },
+  computed: {
+    userRole () {
+      return Number(localStorage.getItem('role'))
+    }
   }
 }
 </script>
@@ -27,7 +40,7 @@ export default {
 <style scoped>
 #nav {
   padding: 10px;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 #nav a {
