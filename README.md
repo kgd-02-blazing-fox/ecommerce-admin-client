@@ -1,24 +1,20 @@
 # ecommerce-admin-client
+<br>
 
-## Project setup
-```
-npm install
-```
+### https://arissatya-ecommercecms.web.app/admin
+<br>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### https://arissatya-ecommercecms.web.app/
 
-### Compiles and minifies for production
-```
-npm run build
-```
+<br>
 
-### Lints and fixes files
-```
-npm run lint
-```
+#### admin and user, db in server repository
+    https://github.com/arissatya/ecommerce-admin-server
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+    /json-seed
+
+<br>
+
+---
+
+#### API https://github.com/arissatya/ecommerce-admin-server/blob/master/API.md
