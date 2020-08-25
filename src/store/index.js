@@ -25,7 +25,7 @@ export default new Vuex.Store({
     getProducts (context) {
       axios({
         method: 'GET',
-        url: 'https://ecommerce-cms-laurentius.herokuapp.com/products',
+        url: 'http://localhost:3000/products',
         headers: { access_token: localStorage.getItem('access_token') }
       })
         .then(response => {
@@ -34,9 +34,9 @@ export default new Vuex.Store({
         .catch(err => console.log(err))
     },
     postProducts (context, payload) {
-      axios({
+      return axios({
         method: 'POST',
-        url: 'https://ecommerce-cms-laurentius.herokuapp.com/products',
+        url: 'http://localhost:3000/products',
         headers: { access_token: localStorage.getItem('access_token') },
         data: {
           name: payload.name,
@@ -46,13 +46,13 @@ export default new Vuex.Store({
           category: payload.category
         }
       })
-        .then(response => { console.log(response.data) })
-        .catch(err => console.log(err))
+      // .then(response => { console.log(response.data) })
+      // .catch(err => console.log(err))
     },
     putProducts (context, payload, id) {
-      axios({
+      return axios({
         method: 'PUT',
-        url: `https://ecommerce-cms-laurentius.herokuapp.com/products/${id}`,
+        url: `http://localhost:3000/products/${id}`,
         headers: { access_token: localStorage.getItem('access_token') },
         data: {
           name: payload.name,
@@ -62,17 +62,17 @@ export default new Vuex.Store({
           category: payload.category
         }
       })
-        .then(response => {})
-        .catch(err => console.log(err))
+      // .then(response => {})
+      // .catch(err => console.log(err))
     },
     delProducts (context, id) {
-      axios({
+      return axios({
         method: 'DELETE',
-        url: `https://ecommerce-cms-laurentius.herokuapp.com/products/${id}`,
+        url: `http://localhost:3000/products/${id}`,
         headers: { access_token: localStorage.getItem('access_token') }
       })
-        .then(response => {})
-        .catch(err => console.log(err))
+      // .then(response => {})
+      // .catch(err => console.log(err))
     }
   },
   getters: {
