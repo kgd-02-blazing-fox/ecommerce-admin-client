@@ -116,13 +116,14 @@ export default {
     },
     editProduct () {
       const payload = {
+        id: this.$route.params.id,
         name: this.name,
         image_url: this.image_url,
         price: this.price,
         stock: this.stock,
         category: this.category
       }
-      this.$store.dispatch('putProducts', payload, this.$route.params.id)
+      this.$store.dispatch('putProducts', payload)
         .then(response => {
           this.successMessage = 'Product updated'
           setTimeout(() => {

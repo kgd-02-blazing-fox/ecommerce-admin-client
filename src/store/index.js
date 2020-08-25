@@ -41,24 +41,24 @@ export default new Vuex.Store({
         data: {
           name: payload.name,
           image_url: payload.image_url,
-          price: payload.price,
-          stock: payload.stock,
+          price: Number(payload.price),
+          stock: Number(payload.stock),
           category: payload.category
         }
       })
       // .then(response => { console.log(response.data) })
       // .catch(err => console.log(err))
     },
-    putProducts (context, payload, id) {
+    putProducts (context, payload) {
       return axios({
         method: 'PUT',
-        url: `http://localhost:3000/products/${id}`,
+        url: `http://localhost:3000/products/${payload.id}`,
         headers: { access_token: localStorage.getItem('access_token') },
         data: {
           name: payload.name,
           image_url: payload.image_url,
-          price: payload.price,
-          stock: payload.stock,
+          price: Number(payload.price),
+          stock: Number(payload.stock),
           category: payload.category
         }
       })
